@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block content %} 
+<div class="colorlib-intro">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2 class="intro">It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="colorlib-product">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <div class="featured">
+          <a href="#" >
+            <img src="{% static 'images/na10.jpg' %}" class="featured-img" >
+          </a>
+          <div class="desc">
+            <h2><a href="#">Shop Men's Collection</a></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 text-center">
+        <div class="featured">
+          <a href="#" >
+            <img src="{% static 'images/na11.jpg' %}" class="featured-img" >
+          </a>
+          <div class="desc">
+            <h2><a href="#">Shop Women's Collection</a></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="colorlib-nav" role="navigation">
+<div class="sale">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 text-center">
+        <div class="row">
+          <div class="owl-carousel2">
+            <div class="item">
+              <div class="col">
+                <h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
+              </div>
+            </div>
+            <div class="item">
+              <div class="col">
+                <h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
+<div class="colorlib-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+        <h2>Best Sellers</h2>
+      </div>
+    </div>
+    <div class="row row-pb-md">
+      {% for i in product %}
+      <div class="col-lg-3 mb-4 text-center">
+        <div class="product-entry border">
+          <a href="{% url 'product' i.id %}" class="prod-img">
+            <img src="{{i.img.url}}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+          </a>
+          <div class="desc">
+            <h2><a href="#">{{i.name}}</a></h2>
+            <span class="price">&#x20B9;{{i.price}}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p><a href="{% url 'mens' %}" class="btn btn-primary btn-lg">Shop All Products</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

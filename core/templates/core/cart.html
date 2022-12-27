@@ -1,0 +1,120 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Cart {% endblock %}
+{% block content %} 
+  <section class="cart_area section_padding">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if cartitem %}
+              {% for cartproducts in cartitem %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <a href="{% url 'product' cartproducts.id %}">
+                      <img src="{{cartproducts.product.img.url}}" alt="" />
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <p>{{cartproducts.product.name}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>&#x20B9;{{cartproducts.product.price}}</h5>
+                </td>
+                <td>
+                  <div class="product_count">                  
+                    <span class="input-number-decrement">
+                      <a href="{% url 'dicrement' cartproducts.product.id %}"><i class="ti-minus"></i></a>                     
+                    </span>
+                      <input class="input-number" type="text" value="{{cartproducts.quantity}}" min="0" max="10">
+                    <span class="input-number-increment">
+                      <a href="{% url 'addcart' cartproducts.product.id %}"><i class="ti-plus"></i></a>
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <a href="{% url 'delete' cartproducts.product.id %}"><h5>Delete</h5></a>
+                </td>
+                <!-- <td>
+                  <h5>&#x20B9;{{cartproducts.total}}</h5>
+                </td> -->
+              </tr>
+              {% endfor %}
+              {% else %}
+              <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="single_product_iner">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="single_product_img">
+                                        <img src="{% static 'assets/img/ma2.jpeg'  %}" class="img-fluid" alt="#">
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-sm-6">
+                                    <div class="single_product_content">
+                                        <h2>Your cart is Empty</h2>
+                                        <h6>Look like you havent't added anything to your cart yet</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              {% endif %}
+              <tr class="bottom_button">
+                <td>
+                  <a class="btn_1" href="/">Back To Home</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right">
+                    <a class="btn_1" href="{% url 'mens' %}">Add Product</a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Total</h5>
+                </td>
+                <td>
+                  <h5>&#x20B9;{{total}}</h5>
+                </td>
+              </tr>
+              <tr class="shipping_area">
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Shipping</h5>
+                </td>
+                <td>
+                  <h5>&#x20B9;40</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="{% url 'checkout' %}">Continue checkout</a>
+            <!-- <a class="btn_1 checkout_btn_1" href="#">checkout</a> -->
+          </div>
+        </div>
+      </div>
+  </section>
+{% endblock %}
